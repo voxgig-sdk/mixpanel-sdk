@@ -1,0 +1,27 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      description: "Set properties on a Mixpanel user profile."
+      security: {
+        in: "header"
+        name: "Authorization"
+        prefix: "Basic"
+        scheme: "apiSecretAuth"
+        type: "http"
+      }
+      servers: [
+        {
+          url: "https://api.mixpanel.com"
+        }
+      ]
+      summary: "Set properties on a Mixpanel user profile."
+      title: "Mixpanel Engage API"
+      version: "1.0.0"
+      website: "https://mixpanel.com"
+    }
+  }
+}
+

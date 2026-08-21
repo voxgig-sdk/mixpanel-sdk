@@ -1,0 +1,37 @@
+{
+  "existing": {
+    "engage": {
+      "ENGAGE00": {
+        "distinct_id": "DISTINCT01",
+        "id": "ENGAGE00",
+        "set": {},
+        "status": "s35",
+        "token": "s36"
+      },
+      "ENGAGE01": {
+        "distinct_id": "DISTINCT01",
+        "id": "ENGAGE01",
+        "set": {},
+        "status": "s67",
+        "token": "s68"
+      },
+      "ENGAGE02": {
+        "distinct_id": "DISTINCT01",
+        "id": "ENGAGE02",
+        "set": {},
+        "status": "s99",
+        "token": "s9a"
+      }
+    }
+  },
+  "new": {
+    "engage": {
+      "engage_ref01": {
+        "distinct_id": "DISTINCT01",
+        "set": {},
+        "status": "scb",
+        "token": "scc"
+      }
+    }
+  }
+}

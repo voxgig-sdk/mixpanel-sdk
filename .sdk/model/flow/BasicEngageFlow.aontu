@@ -1,0 +1,18 @@
+# BasicEngageFlow
+
+main: kit: flow: BasicEngageFlow:
+{
+  entity: "engage",
+  kind: "basic",
+  name: "BasicEngageFlow",
+  step: [
+    {
+      input: {
+        ref: "engage_ref01"
+      }
+
+      op: "create"
+    }
+  ],
+  "key$": "BasicEngageFlow"
+}
