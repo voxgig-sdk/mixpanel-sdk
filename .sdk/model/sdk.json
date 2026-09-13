@@ -1,6 +1,15 @@
 {
+  "NAME": "MIXPANEL",
+  "Name": "Mixpanel",
   "def": "mixpanel-profile-only.json",
   "main": {
+    "api": {
+      "entity": {},
+      "guide": {}
+    },
+    "custom": {
+      "plurals": {}
+    },
     "def": {
       "desc": ""
     },
@@ -842,5 +851,8 @@
     }
   },
   "name": "mixpanel",
+  "name-": "mixpanel",
+  "name_": "mixpanel",
+  "name__orig": "mixpanel",
   "origin": "voxgig-sdk"
 }
