@@ -89,6 +89,10 @@ class MixpanelConfig
               'type' => '`$STRING`',
             ],
           ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
+          ],
           'name' => 'engage',
           'op' => [
             'create' => [
@@ -100,13 +104,18 @@ class MixpanelConfig
                   'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/engage',
-                  'parts' => [
-                    'engage',
+                  'segments' => [
+                    [
+                      'lit' => 'engage',
+                    ],
                   ],
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'engage',
                   ],
                 ],
               ],

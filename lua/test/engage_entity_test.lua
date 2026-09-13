@@ -87,7 +87,7 @@ function engage_basic_setup(extra)
     ["MIXPANEL_TEST_ENGAGE_ENTID"] = idmap,
     ["MIXPANEL_TEST_LIVE"] = "FALSE",
     ["MIXPANEL_TEST_EXPLAIN"] = "FALSE",
-    ["MIXPANEL_APIKEY"] = "NONE",
+    ["MIXPANEL_APIKEY"] = "",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -98,6 +98,9 @@ function engage_basic_setup(extra)
 
   if env["MIXPANEL_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
+      -- FIRST, so the generated fields below win: sdk-test-control.json's
+      -- test.client.options adds to the live client, it does not redirect it.
+      runner.live_client_options(),
       {
         apikey = env["MIXPANEL_APIKEY"],
       },

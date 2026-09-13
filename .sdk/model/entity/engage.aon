@@ -51,8 +51,10 @@ main: kit: entity: engage: {
         {
           method: "POST"
           orig: "/engage"
-          parts: [
-            "engage"
+          segments: [
+            {
+              lit: "engage"
+            }
           ]
           transform: {
             req: "`reqdata`"

@@ -32,6 +32,7 @@ import { MixpanelSDK } from '@voxgig-sdk/mixpanel'
 
 const client = new MixpanelSDK({
   apikey: process.env.MIXPANEL_APIKEY,
+  secret: process.env.MIXPANEL_SECRET,
 })
 ```
 
@@ -129,7 +130,7 @@ console.log(engage)
 You can also use the instance method:
 
 ```ts
-const client = new MixpanelSDK({ apikey: '...' })
+const client = new MixpanelSDK({ apikey: '...', secret: '...' })
 const testClient = client.tester()
 ```
 
@@ -166,6 +167,7 @@ const logger = {
 
 const client = new MixpanelSDK({
   apikey: '...',
+  secret: '...',
   extend: [logger],
 })
 ```
@@ -177,6 +179,7 @@ Create a `.env.local` file at the project root:
 ```
 MIXPANEL_TEST_LIVE=TRUE
 MIXPANEL_APIKEY=<your-key>
+MIXPANEL_SECRET=<your-secret>
 ```
 
 Then run:
@@ -195,6 +198,7 @@ cd ts && npm test
 ```ts
 new MixpanelSDK(options?: {
   apikey?: string
+  secret?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -206,6 +210,7 @@ new MixpanelSDK(options?: {
 | Option | Type | Description |
 | --- | --- | --- |
 | `apikey` | `string` | API key for authentication. |
+| `secret` | `string` | API secret for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -332,6 +337,29 @@ const engage = await client.Engage().create({
   token: 'example_token',
 })
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced

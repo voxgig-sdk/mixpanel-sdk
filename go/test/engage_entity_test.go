@@ -52,7 +52,7 @@ func TestEngageEntity(t *testing.T) {
 		// CREATE
 		engageRef01Ent := client.Engage(nil)
 		engageRef01Data := core.ToMapAny(vs.GetProp(
-			vs.GetPath([]any{"new", "engage"}, setup.data), "engage_ref01"))
+			vs.GetPath(setup.data, []any{"new", "engage"}), "engage_ref01"))
 
 		engageRef01DataResult, err := engageRef01Ent.Create(engageRef01Data, nil)
 		if err != nil {
@@ -93,7 +93,7 @@ func engageBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"engage01", "engage02", "engage03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -113,7 +113,7 @@ func engageBasicSetup(extra map[string]any) *entityTestSetup {
 		"MIXPANEL_TEST_ENGAGE_ENTID": idmap,
 		"MIXPANEL_TEST_LIVE":      "FALSE",
 		"MIXPANEL_TEST_EXPLAIN":   "FALSE",
-		"MIXPANEL_APIKEY":         "NONE",
+		"MIXPANEL_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["MIXPANEL_TEST_ENGAGE_ENTID"])
@@ -122,11 +122,23 @@ func engageBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["MIXPANEL_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["MIXPANEL_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewMixpanelSDK(core.ToMapAny(mergedOpts))
 	}
