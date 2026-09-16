@@ -4,7 +4,14 @@ declare(strict_types=1);
 // Mixpanel SDK feature factory
 
 require_once __DIR__ . '/feature/BaseFeature.php';
+require_once __DIR__ . '/feature/DebugFeature.php';
+require_once __DIR__ . '/feature/IdempotencyFeature.php';
+require_once __DIR__ . '/feature/MetricsFeature.php';
+require_once __DIR__ . '/feature/PagingFeature.php';
+require_once __DIR__ . '/feature/RatelimitFeature.php';
+require_once __DIR__ . '/feature/RetryFeature.php';
 require_once __DIR__ . '/feature/TestFeature.php';
+require_once __DIR__ . '/feature/TimeoutFeature.php';
 
 
 class MixpanelFeatures
@@ -14,8 +21,22 @@ class MixpanelFeatures
         switch ($name) {
             case "base":
                 return new MixpanelBaseFeature();
+            case "debug":
+                return new MixpanelDebugFeature();
+            case "idempotency":
+                return new MixpanelIdempotencyFeature();
+            case "metrics":
+                return new MixpanelMetricsFeature();
+            case "paging":
+                return new MixpanelPagingFeature();
+            case "ratelimit":
+                return new MixpanelRatelimitFeature();
+            case "retry":
+                return new MixpanelRetryFeature();
             case "test":
                 return new MixpanelTestFeature();
+            case "timeout":
+                return new MixpanelTimeoutFeature();
             default:
                 return new MixpanelBaseFeature();
         }
@@ -31,7 +52,14 @@ class MixpanelFeatures
     {
         switch ($name) {
             case "base":
+            case "debug":
+            case "idempotency":
+            case "metrics":
+            case "paging":
+            case "ratelimit":
+            case "retry":
             case "test":
+            case "timeout":
                 return true;
             default:
                 return false;

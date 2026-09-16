@@ -5,21 +5,21 @@
         "distinct_id": "DISTINCT01",
         "id": "ENGAGE00",
         "set": {},
-        "status": "s35",
+        "status": 53,
         "token": "s36"
       },
       "ENGAGE01": {
         "distinct_id": "DISTINCT01",
         "id": "ENGAGE01",
         "set": {},
-        "status": "s67",
+        "status": 103,
         "token": "s68"
       },
       "ENGAGE02": {
         "distinct_id": "DISTINCT01",
         "id": "ENGAGE02",
         "set": {},
-        "status": "s99",
+        "status": 153,
         "token": "s9a"
       }
     }
@@ -29,8 +29,90 @@
       "engage_ref01": {
         "distinct_id": "DISTINCT01",
         "set": {},
-        "status": "scb",
+        "status": 203,
         "token": "scc"
+      }
+    }
+  },
+  "requests": {
+    "POST /engage": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "createProfile",
+        "parameters": [],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "$distinct_id": {
+                    "type": "string"
+                  },
+                  "$set": {
+                    "properties": {
+                      "$email": {
+                        "type": "string"
+                      },
+                      "$name": {
+                        "type": "string"
+                      },
+                      "plan": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "$token": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "$token",
+                  "$distinct_id",
+                  "$set"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$distinct_id": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Accepted"
+          }
+        },
+        "security": [
+          {
+            "apiSecretAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "apiSecretAuth": {
+            "scheme": "basic",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
       }
     }
   }

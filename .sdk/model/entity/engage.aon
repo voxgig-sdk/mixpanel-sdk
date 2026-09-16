@@ -49,6 +49,12 @@ main: kit: entity: engage: {
       name: "create"
       points: [
         {
+          contract: {
+            id: "POST /engage"
+            json: "{\"operationId\":\"createProfile\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$distinct_id\":{\"type\":\"string\"},\"$set\":{\"properties\":{\"$email\":{\"type\":\"string\"},\"$name\":{\"type\":\"string\"},\"plan\":{\"type\":\"string\"}},\"type\":\"object\"},\"$token\":{\"type\":\"string\"}},\"required\":[\"$token\",\"$distinct_id\",\"$set\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$distinct_id\":{\"type\":\"string\"},\"id\":{\"type\":\"string\"},\"status\":{\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Accepted\"}},\"security\":[{\"apiSecretAuth\":[]}],\"securitySchemes\":{\"apiSecretAuth\":{\"scheme\":\"basic\",\"type\":\"http\"}},\"securitySource\":\"definition\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "POST"
           orig: "/engage"
           segments: [
